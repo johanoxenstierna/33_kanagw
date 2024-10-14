@@ -138,6 +138,9 @@ class GenObjects:
         time0 = time.time()
         for i in range(P.NUM_Z):
             # print(i)
+
+            '''TODO: Find starting coordinates and xy velocity of segment Z'''
+
             for j in range(20):  # smallest ind = bottom
                 if P.A_F:
                     # o1s = o0.O1[str(i) + '_' + str(j) + '_static']
@@ -145,7 +148,7 @@ class GenObjects:
                     id_f = str(i) + '_' + str(j) + '_' + type
                     o1f = O1C(o1_id=id_f, pic=f_, o0=o0, type=type)  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
 
-                    o1f.gen_f(o1s)
+                    o1f.gen_f()
 
                     o0.O1[id_f] = o1f
 

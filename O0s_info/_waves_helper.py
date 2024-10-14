@@ -9,7 +9,10 @@ from src.trig_functions import min_max_normalization, min_max_normalize_array
 
 
 def gen_stns():
-    """New: Use mvn"""
+    """
+    New: OBS TH must have a single X index which specifies the particle that is breaking.
+    And it breaks every single time!
+    """
 
     PATH_OUT_stns_TZX = './O0s_info/stns_TZX.npy'
     PATH_OUT_TH = './O0s_info/TH.npy'
@@ -196,10 +199,10 @@ def gen_TS(pdf, pdf_post_peak, peak):
     """
 
     TS = np.copy(pdf)  # Shift thourhg time add Y values with this
-    TS = min_max_normalize_array(TS, y_range=[0, 10])
+    TS = min_max_normalize_array(TS, y_range=[0, 20])
 
     shift_post_peak_pdf = -beta.pdf(x=np.linspace(0, 1, len(pdf_post_peak)), a=2, b=4, loc=0)
-    shift_post_peak_pdf = min_max_normalize_array(shift_post_peak_pdf, y_range=[-50, 0])
+    shift_post_peak_pdf = min_max_normalize_array(shift_post_peak_pdf, y_range=[-60, 0])
 
     TS[peak:] += shift_post_peak_pdf
 

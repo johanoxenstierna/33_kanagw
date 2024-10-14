@@ -93,6 +93,34 @@ class O1C(AbstractObject, AbstractSSS):
 
         asdf = 5
 
+
+    def gen_f(_s, o1s):
+        """
+        NEW: f is totally disconnected from o1_static.
+        Rather, an f is generated at a specified peak frame.
+        """
+
+        '''indicies where y-tangent is at max'''
+        # if int(o1.id_s[0]) + 5 >= (P.NUM_X - 1):
+
+        _s.xy_t, _s.alphas, _s.rotation, _s.scale = foam_f(_s, o1s)  # NEED TO SHRINK GERSTNER WAVE WHEN IT BREAKS
+        _s.zorder += 2530  # 1000 Z = 10 P.NUM_Z
+
+        _s.xy = np.copy(_s.xy_t)
+        _s.xy *= _s.o0.gi.distance_mult[_s.z_key]
+        _s.xy[:, 0] += _s.gi['ld'][0] + _s.gi['o1_left_start_z']  # last one should be removed ev
+        _s.xy[:, 1] += _s.gi['ld'][1]  # - xy[0, 1]
+        # _s.xy[:, 1] += 10
+
+        _s.scale = np.copy(o1s.scale)
+        _s.scale = min_max_normalization(_s.scale, y_range=[0.6, 1])
+        # _s.scale = np.ones((len(o1.scale),))
+        # o1.scale = np.ones((len(o1.scale),))
+
+    def gen_r(_s, o1):
+
+        asdf = 5
+
     def gen_b(_s, o1):
         """
 
@@ -121,32 +149,6 @@ class O1C(AbstractObject, AbstractSSS):
         _s.scale = np.ones(shape=(len(_s.xy),))
 
         # _s.xy[:, 1] += 1500  # WTF
-
-    def gen_f(_s, o1s):
-        """
-
-        """
-
-        '''indicies where y-tangent is at max'''
-        # if int(o1.id_s[0]) + 5 >= (P.NUM_X - 1):
-
-        _s.xy_t, _s.alphas, _s.rotation, _s.scale = foam_f(_s, o1s)  # NEED TO SHRINK GERSTNER WAVE WHEN IT BREAKS
-        _s.zorder += 2530  # 1000 Z = 10 P.NUM_Z
-
-        _s.xy = np.copy(_s.xy_t)
-        _s.xy *= _s.o0.gi.distance_mult[_s.z_key]
-        _s.xy[:, 0] += _s.gi['ld'][0] + _s.gi['o1_left_start_z']  # last one should be removed ev
-        _s.xy[:, 1] += _s.gi['ld'][1]  # - xy[0, 1]
-        # _s.xy[:, 1] += 10
-
-        _s.scale = np.copy(o1s.scale)
-        _s.scale = min_max_normalization(_s.scale, y_range=[0.6, 1])
-        # _s.scale = np.ones((len(o1.scale),))
-        # o1.scale = np.ones((len(o1.scale),))
-
-    def gen_r(_s, o1):
-
-        asdf = 5
 
 
 
