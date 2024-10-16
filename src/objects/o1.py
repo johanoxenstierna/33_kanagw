@@ -93,7 +93,6 @@ class O1C(AbstractObject, AbstractSSS):
 
         asdf = 5
 
-
     def gen_f(_s, o1s):
         """
         NEW: f is totally disconnected from o1_static.

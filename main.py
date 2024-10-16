@@ -116,7 +116,7 @@ print("len of vid: " + str(sec_vid) + " s" + "    " + str(min_vid) + " min")
 
 start_t = time.time()
 ani = animation.FuncAnimation(fig, animate, frames=range(P.FRAMES_START, P.FRAMES_STOP),
-                              blit=True, interval=60, init_func=init,
+                              blit=True, interval=20, init_func=init,
                               repeat=True)  # interval only affects live ani. blitting seems to make it crash
 
 if WRITE == 0:

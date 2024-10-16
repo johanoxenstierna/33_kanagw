@@ -63,8 +63,8 @@ class GenObjects:
 
         '''THESE ARE TEMPORARY (haha no). REMOVE WHEN PADDING SORTED'''
 
-        k0 = imread('./pictures/k0.png')
-        k0 = np.flipud(k0)  # essential
+        # k0 = imread('./pictures/k0.png')
+        # k0 = np.flipud(k0)  # essential
 
         # '''ROUND OBJECTS DIAMETER. They need to correspond with indexing'''
         d = 0
@@ -80,12 +80,7 @@ class GenObjects:
         # # These are now from bottom. WHERE THEY APPEAR ON MAP
         BOT_Z = int(d/2) + 100  # If start_z = 25, that means diameter max is 49
         TOP_Z = 300  # this plus half diameter
-        #
-        # # pend del
-        # if BOT_Z < int(d / 2):
-        #     print("inds_z[0]: " + str(BOT_Z), "   d: " + str(d))
-        #     raise Exception("d too large")
-        #
+
         # '''indexing has to be identical for prepping k0 cuts and generaing the o1 objects'''
         pxls_x = np.linspace(start=100, stop=1150, num=P.NUM_X, dtype=int)
         pxls_z = np.linspace(start=BOT_Z, stop=TOP_Z, num=P.NUM_Z, dtype=int)
@@ -93,7 +88,8 @@ class GenObjects:
         # if P.COMPLEXITY == 1:
         #     prep_k0.cut_k0(k0, pxls_x, pxls_z, d)
         #
-        b_, f_ = prep_k0.get_c_d(k0, d)
+        # b_, f_ = prep_k0.get_c_d(k0, d)
+        f_ = imread('./pictures/waves/O1/d.png')
 
         '''KANAGAWA FRACTALS'''
         if P.A_K:
@@ -135,20 +131,22 @@ class GenObjects:
         New: 20 f per z. Work much more with segments i.e. z axis. 
         And hardcode when things are activated based on frames. 
         '''
+
+        o1s = o0.O1[str(o0.gi.peak) + '_0_static']
+
         time0 = time.time()
         for i in range(P.NUM_Z):
             # print(i)
 
             '''TODO: Find starting coordinates and xy velocity of segment Z'''
-
-            for j in range(20):  # smallest ind = bottom
+            for j in range(1):  # smallest ind = bottom
                 if P.A_F:
                     # o1s = o0.O1[str(i) + '_' + str(j) + '_static']
                     type = 'f'
                     id_f = str(i) + '_' + str(j) + '_' + type
                     o1f = O1C(o1_id=id_f, pic=f_, o0=o0, type=type)  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
 
-                    o1f.gen_f()
+                    o1f.gen_f(o1s)
 
                     o0.O1[id_f] = o1f
 

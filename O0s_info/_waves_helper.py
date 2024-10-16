@@ -190,7 +190,7 @@ def gen_stns():
     np.save(PATH_OUT_stns_TZX, stns_TZX)
     np.save(PATH_OUT_TH, TH)
 
-    return stns_TZX, TH, TS
+    return stns_TZX, TH, TS, peak
 
 
 def gen_TS(pdf, pdf_post_peak, peak):

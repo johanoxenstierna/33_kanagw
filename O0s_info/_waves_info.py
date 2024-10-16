@@ -46,7 +46,7 @@ class Waves_info:
         # _s.stns_ZX, _s.H = gen_stns_old()
         if P.QUERY_STNS == 0:
             print("Building stns ...")
-            _s.stns_TZX, _s.TH, _s.TS = gen_stns()
+            _s.stns_TZX, _s.TH, _s.TS, _s.peak = gen_stns()  # peak is an index in X
             print("Done uilding stns ...")
         else:
             _s.stns_TZX = np.load('./O0s_info/stns_TZX.npy')
