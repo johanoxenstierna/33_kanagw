@@ -92,8 +92,8 @@ class GenObjects:
         f_ = imread('./pictures/waves/O1/d.png')
 
         '''KANAGAWA FRACTALS'''
-        if P.A_K:
-            R_, R_inds_used = prep_k0.get_kanagawa_fractals()
+        # if P.A_K:
+        #     R_, R_inds_used = prep_k0.get_kanagawa_fractals()
 
         # print("DIAMETER: " + str(d))
 
@@ -130,32 +130,35 @@ class GenObjects:
         '''
         New: 20 f per z. Work much more with segments i.e. z axis. 
         And hardcode when things are activated based on frames. 
+        OBS, xy velocity cant just be parsed. They were generated above and now 
+        one must find what they ended up being for the peak particle. 
         '''
 
         o1s = o0.O1[str(o0.gi.peak) + '_0_static']
 
         time0 = time.time()
-        for i in range(P.NUM_Z):
-            # print(i)
+        # for j in range(P.NUM_Z):
 
-            '''TODO: Find starting coordinates and xy velocity of segment Z'''
-            for j in range(1):  # smallest ind = bottom
-                if P.A_F:
-                    # o1s = o0.O1[str(i) + '_' + str(j) + '_static']
-                    type = 'f'
-                    id_f = str(i) + '_' + str(j) + '_' + type
-                    o1f = O1C(o1_id=id_f, pic=f_, o0=o0, type=type)  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
+        '''TODO: Find starting coordinates and xy velocity of segment Z'''
+        # for k in range(1):  # smallest ind = bottom
+        if P.A_F:
+            # o1s = o0.O1[str(i) + '_' + str(j) + '_static']
+            type = 'f'
+            id_f = 'None' + '_' + '0' + '_' + '0' + '_' + type  # x, z, k:chronological
+            o1f_ref = O1C(o1_id=id_f, pic=f_, o0=o0, type=type)  # THE PIC IS ALWAYS TIED TO 1 INSTANCE?
+            o1f_ref.gen_f_ref(o1s)
+            o0.O1[id_f] = o1f_ref
 
-                    o1f.gen_f(o1s)
+            for k in range(1, 20):
+                id_f = 'None' + '_' + '0' + '_' + str(k) + '_' + type
+                o1f = O1C(o1_id=id_f, pic=f_, o0=o0, type=type)
+                o1f.gen_f_from_ref(o1f_ref, k)
+                o0.O1[id_f] = o1f
 
-                    o0.O1[id_f] = o1f
+            sa = 5
 
-                adf = 5
-
-            print(i)
 
         time_f = time.time() - time0
-
         print("time static: " + str(time_static))
         print("time f: " + str(time_f))
 

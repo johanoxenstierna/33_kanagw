@@ -45,7 +45,6 @@ def gen_stns():
     BOUND_UP_y = 3
     BOUND_MI_y = 2.5
 
-
     if P.NUM_Z < 2:
         PEAK_STEAPN = 1.5
         pdf_ZX = beta.pdf(x=np.linspace(0, 1, P.NUM_X), a=4, b=4, loc=0)
@@ -65,7 +64,7 @@ def gen_stns():
         H = np.zeros(shape=(P.NUM_Z, P.NUM_X), dtype=np.uint16)
         H[0, 0:peak] = 0
         H[0, peak] = 2
-        H[0, peak + 1:P.NUM_X] =  1
+        H[0, peak + 1:P.NUM_X] = 1
 
         stns_TZX[:, 0, :] = stns_ZX
         TH[:, 0, :] = H
@@ -207,8 +206,6 @@ def gen_TS(pdf, pdf_post_peak, peak):
     TS[peak:] += shift_post_peak_pdf
 
     return TS
-
-
 
 
 if __name__ == "__main__":
